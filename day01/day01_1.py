@@ -16,6 +16,7 @@ s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.close()
 
 '''------------06--------------'''
+'''
 import socket
 
 if __name__ == '__main__':
@@ -27,4 +28,22 @@ if __name__ == '__main__':
 
     udp_socket.sendto(send_data, ("192.168.1.102", 8080))
 
-    socket.close()
+    udp_socket.close()
+'''
+
+from socket import *
+
+udp_socket = socket(AF_INET, SOCK_DGRAM)
+
+dest_addr = ('192.168.1.102', 8080)
+
+send_data = input('请输入要发送的数据：')
+
+udp_socket.sendto(send_data.encode('utf-8'), dest_addr)
+
+recv_data = udp_socket.recvfrom(1024)
+
+print(recv_data[0].decode('gbk'))
+print(recv_data[1])
+
+udp_socket.close()
