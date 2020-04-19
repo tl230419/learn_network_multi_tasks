@@ -63,6 +63,7 @@ udp_socket.close()
 '''
 
 '''------------08-2-----------'''
+'''
 from socket import *
 
 udp_socket = socket(AF_INET, SOCK_DGRAM)
@@ -75,3 +76,20 @@ recv_data = udp_socket.recvfrom(1024)
 print(recv_data[0].decode('gbk'))
 
 udp_socket.close()
+'''
+
+'''------------09-----------'''
+import socket
+
+if __name__ == '__main__':
+    udp_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+    send_content = "大家好，我是渣渣辉"
+
+    send_data = send_content.encode("utf-8")
+
+    udp_socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, True)
+
+    udp_socket.sendto(send_data, ("255.255.255.255", 9090))
+
+    udp_socket.close()
