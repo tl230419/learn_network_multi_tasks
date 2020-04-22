@@ -17,6 +17,19 @@ while True:
     print(ip_port)
     recv_data = new_client_socket.recv(1024)
     file_name = recv_data.decode()
+    print(file_name)
+    try:
+        with open(file_name, "rb") as file:
+            while True:
+                file_data = file.read(1024)
+                if file_data:
+                    new_client_socket.send(file_data)
+                else:
+                    break
+    except:
+        print("文件 %s 下载出错" % file_name)
+    else:
+        print("文件 %s 下载成功" % file_name)
     new_client_socket.close()
 
 tcp_server_socket.close()
