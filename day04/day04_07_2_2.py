@@ -35,7 +35,7 @@ class ThreadCrawl(threading.Thread):
         self.out_queue = out_queue
 
     def run(self):
-        count = 5
+        count = 1
         while count > 0:
             item = self.queue.get()
             data = self._data_post(item)
